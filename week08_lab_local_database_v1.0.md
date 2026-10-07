@@ -483,6 +483,17 @@ class SellItemPage extends StatefulWidget {
 ```text
 บันทึกผลลัพธ์ที่นี่
 ```
+# 1
+<img width="322" height="740" alt="image" src="https://github.com/user-attachments/assets/4916abcd-a062-4a54-8f37-6d10ce0f4d6b" />
+
+# 2
+<img width="320" height="733" alt="image" src="https://github.com/user-attachments/assets/48be09f3-f1d5-4a89-9c2a-c5b14c707116" />
+
+# 3
+<img width="327" height="742" alt="image" src="https://github.com/user-attachments/assets/678074c8-4965-49be-8b41-5ed4cb5c2481" />
+
+# 4
+<img width="387" height="875" alt="image" src="https://github.com/user-attachments/assets/a6d2b24f-20ef-4baa-830d-4b334b522699" />
 
 ---
 
