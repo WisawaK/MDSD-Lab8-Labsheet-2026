@@ -56,7 +56,112 @@
 บันทึกโค้ดที่ Gemini ตอบกลับมาที่ด้านล่าง
 
 ```text
-บันทึกผลลัพธ์ที่นี่
+โค้ดภาษา Dart (Drift Table):
+import 'package:drift/drift.dart';
+
+/// ตารางเก็บรายการสินค้าที่ผู้ใช้กดถูกใจ (Favorites / Wishlist)
+/// สำหรับแสดงผลออฟไลน์โดยไม่ต้องเรียก API ซ้ำ และจัดเรียงตามเวลาที่ถูกใจล่าสุดได้
+class FavoriteProducts extends Table {
+  /// 1. รหัสสินค้าจากระบบ API หลัก (ตัวเลข)
+  IntColumn get productId => integer()();
+
+  /// 2. ชื่อสินค้า
+  TextColumn get title => text().withLength(min: 1, max: 200)();
+
+  /// 3. ราคาสินค้า (บาท)
+  RealColumn get price => real()();
+
+  /// 4. URL รูปภาพสินค้าสำหรับแคชแสดงผล
+  TextColumn get imageUrl => text()();
+
+  /// 5. วันและเวลาที่กดถูกใจ
+  DateTimeColumn get likedAt => dateTime().withDefault(currentDateAndTime)();
+
+  @override
+  Set<Column> get primaryKey => {productId};
+}
+
+ตารางที่ 2: AiListingDrafts
+import 'package:drift/drift.dart';
+
+/// ตารางเก็บร่างประกาศขายสินค้าที่ AI ช่วยแนะนำจากรูปถ่าย (AI Listing Drafts)
+/// บันทึกถาวรลงเครื่อง ไม่สูญหายเมื่อปิดแอป และติดตามเวลาแก้ไขล่าสุด
+class AiListingDrafts extends Table {
+  /// 1. รหัสฉบับร่างในเครื่อง (Primary Key รันอัตโนมัติ)
+  IntColumn get id => integer().autoIncrement()();
+
+  /// 2. ชื่อประกาศขายสินค้า
+  TextColumn get title => text().withLength(min: 1, max: 150)();
+
+  /// 3. หมวดหมู่สินค้า
+  TextColumn get category => text().withLength(min: 1, max: 100)();
+
+  /// 4. คำบรรยายรายละเอียดสินค้าที่ AI แนะนำหรือผู้ใช้เพิ่มเติม
+  TextColumn get description => text()();
+
+  /// 5. Path ของไฟล์รูปภาพที่บันทึกไว้ในเครื่อง (Local Storage Path)
+  TextColumn get localImagePath => text()();
+
+  /// 6. วันและเวลาที่สร้างร่างประกาศ
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+
+  /// 7. วันและเวลาที่แก้ไขร่างประกาศล่าสุด
+  DateTimeColumn get updatedAt => dateTime().withDefault(currentDateAndTime)();
+}
+
+ตัวอย่างการประกอบคลาสฐานข้อมูลและ Query สำหรับใช้งานจริง
+import 'package:drift/drift.dart';
+import 'package:drift_flutter/drift_flutter.dart';
+
+part 'app_database.g.dart';
+
+@DriftDatabase(tables: [FavoriteProducts, AiListingDrafts])
+class AppDatabase extends _$AppDatabase {
+  AppDatabase() : super(_openConnection());
+
+  @override
+  int get schemaVersion => 1;
+
+  static QueryExecutor _openConnection() {
+    return driftDatabase(name: 'campus_marketplace_db');
+  }
+
+  // 1. Query รายการสินค้าที่ถูกใจ เรียงจากล่าสุดไปเก่าสุด (Stream สำหรับอัปเดต UI ทันที)
+  Stream<List<FavoriteProduct>> watchRecentFavorites() {
+    return (select(favoriteProducts)
+          ..orderBy([(t) => OrderingTerm.desc(t.likedAt)]))
+        .watch();
+  }
+
+  // 2. บันทึกหรืออัปเดตการกดถูกใจ (Insert or Update on conflict)
+  Future<void> toggleFavorite(FavoriteProduct item) {
+    return into(favoriteProducts).insertOnConflictUpdate(item);
+  }
+
+  // 3. Query รายการร่างประกาศ AI เรียงจากฉบับที่แก้ไขล่าสุด
+  Stream<List<AiListingDraft>> watchRecentDrafts() {
+    return (select(aiListingDrafts)
+          ..orderBy([(t) => OrderingTerm.desc(t.updatedAt)]))
+        .watch();
+  }
+
+  // 4. บันทึกการแก้ไขร่างประกาศ พร้อมอัปเดตเวลา updatedAt เป็นเวลาปัจจุบัน
+  Future<bool> updateDraftContent({
+    required int draftId,
+    required String newTitle,
+    required String newDescription,
+  }) {
+    return (update(aiListingDrafts)..where((t) => t.id.equals(draftId)))
+        .write(
+          AiListingDraftsCompanion(
+            title: Value(newTitle),
+            description: Value(newDescription),
+            updatedAt: Value(DateTime.now()), // รีเฟรชเวลาแก้ไขล่าสุด
+          ),
+        )
+        .then((rows) => rows > 0);
+  }
+}
 ```
 
 
