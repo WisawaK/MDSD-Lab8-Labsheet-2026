@@ -421,12 +421,15 @@ items: const [
 ```
 ## (ก)
 <img width="436" height="981" alt="image" src="https://github.com/user-attachments/assets/fd3a6abe-4b33-4559-8308-72a2836f5c98" />
+
 ## (ข)
 <img width="437" height="963" alt="image" src="https://github.com/user-attachments/assets/eadddbf1-b409-44fa-acee-dc2d291d1146" />
+
 ## (ค)
 <img width="366" height="841" alt="image" src="https://github.com/user-attachments/assets/356d33ef-893a-460e-bf56-0e4f06f57dd6" />
 <img width="371" height="845" alt="image" src="https://github.com/user-attachments/assets/16f5f5e9-5434-4255-9d37-582d521959c4" />
 <img width="326" height="741" alt="image" src="https://github.com/user-attachments/assets/998d0b5e-a682-4e6e-a761-6d7920dfbb99" />
+
 ## (ง)
 <img width="320" height="740" alt="image" src="https://github.com/user-attachments/assets/5ccd7e1b-379e-4583-bcf9-952278c3a266" />
 <img width="315" height="746" alt="image" src="https://github.com/user-attachments/assets/9271f3a5-b5ab-40b5-be37-a61f1dc47067" />
