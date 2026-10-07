@@ -414,10 +414,18 @@ items: const [
 > ⚠️ `IndexedStack` อ้างอิง index ตามตำแหน่งใน List `pages` และ `BottomNavigationBarItem` ต้องมีจำนวนเท่ากับ `pages` เสมอ (ตอนนี้ต้องเป็น 3 ทั้งคู่) ถ้าจำนวนไม่ตรงกันแอปจะ Error ทันทีตอนรัน ไม่ใช่แค่แสดงผลผิด
 
 > ✅ **Checkpoint 4.1** รันแอปแล้วทดสอบ: (ก) กดหัวใจที่สินค้า 3 ชิ้นจากหน้า Home (ข) สลับไป Tab "รายการโปรด" เห็นครบทั้ง 3 ชิ้น (ค) ปิดแอปให้สนิท (Force Stop หรือปัดออกจาก Recent Apps) แล้วเปิดใหม่ กลับไปที่ Tab รายการโปรดอีกครั้ง ถ่ายภาพหน้าจอ (ข) และ (ค) เทียบกัน ต้องแสดงรายการเดิมครบทุกชิ้น พร้อมทดสอบกดลบ (Remove) 1 ชิ้น แล้วปิดเปิดแอปใหม่อีกครั้งเพื่อยืนยันว่าการลบก็ถูกบันทึกถาวรเช่นกัน (ง) กลับไปหน้า Home แล้วกดหัวใจซ้ำที่สินค้าชิ้นเดิมอีกครั้ง (ชิ้นที่ยังไม่ได้ลบ) แล้วตรวจสอบที่ Tab รายการโปรดว่ายังแสดงสินค้าชิ้นนั้นแค่แถวเดียว ไม่ซ้ำเป็น 2 แถว และแอปไม่ Error
+<img width="1917" height="966" alt="image" src="https://github.com/user-attachments/assets/90960994-c8c5-44a0-a1da-bc000818f769" />
 
 ```text
-บันทึกผลลัพธ์ที่นี่
+เว็บfakestoreapi ล้มต้องเลยต้องทำหน้าร้านหลอกๆครับ 
 ```
+<img width="436" height="981" alt="image" src="https://github.com/user-attachments/assets/fd3a6abe-4b33-4559-8308-72a2836f5c98" />
+<img width="437" height="963" alt="image" src="https://github.com/user-attachments/assets/eadddbf1-b409-44fa-acee-dc2d291d1146" />
+<img width="366" height="841" alt="image" src="https://github.com/user-attachments/assets/356d33ef-893a-460e-bf56-0e4f06f57dd6" />
+<img width="371" height="845" alt="image" src="https://github.com/user-attachments/assets/16f5f5e9-5434-4255-9d37-582d521959c4" />
+<img width="326" height="741" alt="image" src="https://github.com/user-attachments/assets/998d0b5e-a682-4e6e-a761-6d7920dfbb99" />
+<img width="320" height="740" alt="image" src="https://github.com/user-attachments/assets/5ccd7e1b-379e-4583-bcf9-952278c3a266" />
+<img width="315" height="746" alt="image" src="https://github.com/user-attachments/assets/9271f3a5-b5ab-40b5-be37-a61f1dc47067" />
 
 ---
 
